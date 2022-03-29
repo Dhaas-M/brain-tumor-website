@@ -1,0 +1,82 @@
+upload(req, res ,(err) => {
+        if(err){
+            res.render('index', {msg:err })
+        } else{
+           // console.log(req.file);
+           // res.send("ok")
+           if(req.file === undefined){
+               res.render('index', {msg: 'No file Selected'})
+           } else{
+
+            const options = {
+                mode: 'text',
+                //pythonPath: '/usr/bin/python', 
+                pythonOptions: ['-u'],
+                // make sure you use an absolute path for scriptPath
+                //scriptPath: '//Users/91877/Desktop/nodeProjects/live in lab/',
+                args: [req.file.filename]
+              };
+            
+                PythonShell.run('test.py', options, function (err, results) {
+                    if (err) throw err;
+                    // results is an array consisting of messages collected during execution
+                    console.log('results: %j', results);
+                    res.render('output', {file: `uploads/${req.file.filename}`, results:results, userDetails:userDetails})
+                  });
+            
+               
+            //    file= `uploads/${req.file.filename}`;
+            //    console.log(file);
+           }
+        }
+    })
+
+    ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+    //child process for exec
+// const { spawn } = require('child_process');
+// const res = require('express/lib/response');
+// const obj = "uploads/myImage-1646399477253.jpeg"
+// const childPython = spawn('python', ['test.py', obj]);
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// const options = {
+//     mode: 'text',
+//     //pythonPath: '/usr/bin/python', 
+//     pythonOptions: ['-u'],
+//     // make sure you use an absolute path for scriptPath
+//     //scriptPath: '//Users/91877/Desktop/nodeProjects/live in lab/',
+//     args: ['myImage-1646840556784.jpg']
+//   };
+
+
+
+// const spawn = require('child_process').spawn
+
+// const process = spawn('python',['os.py','uploads/myImage-1646399477253.jpeg'])
+
+// process.stdout.on('data', function(data) {
+//     console.log(data.toString());
+// } )
+// let ans;
+// childPython.stdout.on('data', async  (data) => {
+//     const app = await data.toString()
+//     console.log(app);
+//     ans =  app[2];
+//     console.log(ans);
+// })
+
+
+
+// childPython.stderr.on('data', (data) => {
+//     console.error(data);
+// })
+
+// childPython.on('close', (code) => {
+//     console.log(code);
+// })
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+

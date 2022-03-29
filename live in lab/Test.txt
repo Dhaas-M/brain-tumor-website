@@ -1,0 +1,114 @@
+
+#Test_Model_Performance
+#__Start_Testing___....
+ 
+
+#_Importing_Modules.... 
+import cv2
+from keras.models import load_model
+from PIL import Image
+import numpy as np
+#from Brain_T_Display import Img_Dis
+from skimage.io import imread, imshow
+import matplotlib.pyplot as plt
+from skimage.color import rgb2ypbpr,rgbcie2rgb,rgb2lab,rgb2hed
+from skimage.filters import meijering
+import numpy as np
+#from Brain_T_Display import Img_Dis
+
+#from Brain_T_color import Img_cr
+#Function_for_performing_test
+
+def Test(In_Img):
+    #In_Img='pred16.jpg'
+
+    #i = In_Img[23:34])
+
+    #Img_Dis(In_Img)
+
+    print("BRAIN STAGES")
+    #_Using_different_filters_to_show_images_in_various_views
+    i1 = imread(In_Img)
+    img = imread(In_Img)
+    i = imread(In_Img)
+    img = img - 100.000
+    #img_new = meijering(img)
+    img1 =   meijering(img)
+    img_1 =  rgbcie2rgb(img1) - 1 
+    img2 = rgb2lab(img)
+    # 
+    plt.plot(),imshow(i1)
+    plt.title("Input Image")
+    plt.show()
+
+    plt.subplot(121),imshow(i)
+    plt.title("input_image")
+
+    plt.subplot(122), imshow(img)
+    plt.title("View-1")
+    plt.show()
+
+    plt.subplot(121), imshow(img2)
+    plt.title("View-2")
+
+    plt.subplot(122), imshow(img_1)
+    plt.title("View-3")
+
+    #plt.subplot(121), imshow(img_new)
+    #plt.title("View-4")
+    #plt.title('RGB Format') 
+    
+    #plt.subplot(122), imshow(img_new)
+    #plt.title('HSV Format') 
+    #Img_cr(In_Img)
+
+
+    model = load_model('Brain_T_Train.h5')
+    batch_size = 10
+    image = cv2.imread(In_Img)
+    img = Image.fromarray(image)
+    img = img.resize((300,300))
+    img = np.array(img)
+    input_img = np.expand_dims(img, axis=0)
+    #result = model.predict_classes(input_img)
+    result=model.predict(input_img) 
+    print(result)
+
+
+
+
+    #print("TUMOR STATUS:")
+    #Tumor_present_print_[[0]]
+    #Tumor_absent_print_[[1]]
+    if(result==0):
+        print("___/\___/\_____Tumour_Present_____/\______/\__")
+    else:
+        print("___/\___/\_____Tumour_Absent______/\______/\__")
+    
+
+
+    #__Test__Ended
+
+
+
+print("Brain Tumor Detector")
+print()
+
+name = str(input("Enter the Name: "))
+age = int(input("Enter your Age:"))
+doc_name = str(input("Enter Doctor Name:"))
+In_Img = input("Enter the Image:")
+print()
+print()
+print()
+print("______________________________________________________________________________________")
+print('Name:',name)
+print("Age:",age)
+print("Doctor name:",doc_name)
+print("Image")
+
+#Img_Dis(In_Img)
+Test(In_Img)
+
+
+    

@@ -1,0 +1,12 @@
+{
+  fieldname: 'myImage',
+  originalname: 'new.jpg',
+  encoding: '7bit',
+  mimetype: 'image/jpeg',
+  destination: './public/uploads/',
+  filename: 'myImage#1646243966970.jpg',
+  path: 'public\\uploads\\myImage#1646243966970.jpg',
+  size: 4634
+}
+
+C:\Users\91877\Desktop\nodeProjects\image handling\public\uploads\myImage#1646245700936.jpg
