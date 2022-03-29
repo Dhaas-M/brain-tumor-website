@@ -105,7 +105,9 @@ def Test(In_Img):
     # result=model.predict(input_img) 
     # print(result)
 
-Test('/Users/91877/Desktop/nodeProjects/live in lab/public/uploads/'+path)
+Test('/Users/91877/Desktop/brain-tumor-website/liveinlab/public/uploads/'+path)
+# Test('C:\Users\91877\Desktop\brain-tumor-website\liveinlab\public\uploads')
+
 #model = load_model('brain_tumor_model_1.h5')
 # image = cv2.imread('/Users/91877/Desktop/nodeProjects/live in lab/public/uploads/'+path)
 # img = Image.fromarray(image)
