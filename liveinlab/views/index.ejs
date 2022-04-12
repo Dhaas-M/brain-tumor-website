@@ -8,13 +8,15 @@
     <title>Document</title>
 </head>
 <body>
+    <img src="https://img.freepik.com/free-photo/brain-blue-background_74945-20.jpg?w=1480">
     <p><%= typeof msg != 'undefined' ? msg : '' %> </p>
     <form action="/" method="post" enctype="multipart/form-data" class="form-img">
-        <input type="file" name="myImage" id="" onchange="loadFile(event)">
+        <input type="file" name="myImage" id="">
+        
         <img id="output"/>
         <button type="submit">Submit</button>
     </form>
 
     <script src="script.js"></script>
 </body>
-</html>
+</html>2

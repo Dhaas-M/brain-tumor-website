@@ -8,13 +8,17 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Login</h1>
+    <img src="https://img.freepik.com/free-photo/brain-blue-background_74945-20.jpg?w=1480">
+    <h1>Brain Tumor Predictor</h1>
+    <div class="LogIn">
+        <h2>LogIn</h2>
     <form action="/login" method="post">
-        <%= typeof op != 'undefined' ? op : '' %>
+      <p>  <%= typeof op != 'undefined' ? op : '' %> </p>
         <input type="email" name="email" id="" placeholder="Email">
         <input type="password" name="password" id="" placeholder="Password">
         <a href="/signup">Create new account</a>
         <button type="submit">Login</button>
     </form>
+    </div>
 </body>
 </html>

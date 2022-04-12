@@ -154,3 +154,21 @@ li{
     position: relative;
     
 }
+.userInfo
+{
+    align-content: center;
+     position: absolute;  
+     height: 45vh;
+     width: 37vh;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-direction: column;
+     gap:1em;
+     
+      border-style: groove;
+     top: 30%; 
+     left: 41%;
+     background-color:transparent;
+     
+}

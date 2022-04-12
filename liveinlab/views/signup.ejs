@@ -8,15 +8,20 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Sign Up</h1>
-    <form action="/signup" method="post">
+    <img src="https://img.freepik.com/free-photo/brain-blue-background_74945-20.jpg?w=1480">
+    <h1>Brain Tumor Predictor</h1>
+    <div class="SignUp">
+        <h2>SignUp</h2>
+    <form action="/signup" method="post" class="Input">
+        
         <%= typeof op != 'undefined' ? op : '' %>
         <input type="text" name="name" value="<%= typeof name != 'undefined' ? name : '' %>" id="" placeholder="Name">
         <input type="email" name="email" id=""  value="<%= typeof email != 'undefined' ? email : '' %>" placeholder="Email" required>
         <input type="password" name="password" id="" placeholder="Password" required>
-        <input type="password" name="repassword" id="" placeholder="Again type the Password" required>
+        <input type="password" name="repassword" id="" placeholder="Re-enter password" required>
         <a href="/login">Already have an account</a>
-        <button type="submit">Create Your Account</button>
+        <button type="submit">SignUp</button>
     </form>
+</div>
 </body>
 </html>
