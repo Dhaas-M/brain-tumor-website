@@ -1,15 +1,7 @@
-
-body
-{
-    
-    padding:0;
-    margin: 0;
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
-    
-    
+body{
+    background-image: url("https://img.freepik.com/free-photo/brain-blue-background_74945-20.jpg?w=1480");
 }
+
 .grid-container {
     display: grid;
     grid-template-columns: auto auto;
@@ -23,23 +15,11 @@ body
       justify-content: center;
       flex-direction: column;
       gap:1em;
-      height: 40vh;
-      width: 37vh;
-      position: absolute;
-     
-      
   }
 
   input{
-      
-    width: 57%;
-    padding: 7px;
-    margin: 0 auto;
-    
-    border: 1px solid 000;
-    border-color: transparent;
-    font-size: 15px;
-    padding-left:35px;
+      width:220px;
+      height:20px;
   }
 
   .detail-heading{
@@ -59,5 +39,3 @@ body
       float: right;
       display: flex;
   }
-
-  
