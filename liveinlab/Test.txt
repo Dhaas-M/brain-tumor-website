@@ -111,4 +111,10 @@ print("Image")
 Test(In_Img)
 
 
+
+ plt.savefig('public/result/'+res_path+'1.png')
+    print('result/'+res_path+'1.png')
+
+'/Users/91877/Desktop/brain-tumor-website/liveinlab/public/uploads/'+path
+
     

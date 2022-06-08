@@ -5,6 +5,10 @@ const mutler = require('multer');
 const md5 = require('md5')
 const mongoose = require('mongoose')
 const User = require('./model/account')
+const fs = require('fs');
+const pdf = require('html-pdf');
+const ejs = require('ejs')
+
 
 mongoose.connect('mongodb://localhost/Tumor', () => console.log('...'))
 
@@ -13,6 +17,8 @@ const  { PythonShell }  = require('python-shell');
 
 //userDetails
 let details= []
+let repDetails = []
+let status,inpImg,i11,i22,i33,tt
 
 //set storage
 const storage = mutler.diskStorage({
@@ -140,7 +146,7 @@ app.post('/login', async (req,res) => {
 // app.get('/detail', (req,res) => {
 //     res.render('detail')
 // })
-
+let type;
 app.post('/detail', (req,res) => {
     const userDetails = {
         name:req.body.name,
@@ -148,14 +154,17 @@ app.post('/detail', (req,res) => {
         gender:req.body.gender,
         drName:req.body.drName
     }
+    type=req.body.type
     details.push(userDetails)
     console.log(details);
+    console.log(type);
     res.render('index')
 
 })
 
 app.post('/', (req,res) => {
      console.log(details);
+     console.log(type)
     upload(req, res ,(err) => {
         if(err){
             res.render('index', {msg:err })
@@ -172,7 +181,7 @@ app.post('/', (req,res) => {
                 pythonOptions: ['-u'],
                 // make sure you use an absolute path for scriptPath
                 //scriptPath: '//Users/91877/Desktop/nodeProjects/live in lab/',
-                args: [req.file.filename]
+                args: [req.file.filename,type]
               };
             
                 PythonShell.run('test.py', options, function (err, results) {
@@ -180,14 +189,23 @@ app.post('/', (req,res) => {
                     // results is an array consisting of messages collected during execution
                     console.log('results: %j', results);
                     const output = parseInt(results[0].slice(2,3))
-                    //const foutput = output[0].slice(2)
                     const i1 = results[1]
                     const i2 = results[2]
                     const i3 = results[3]
-                    console.log(output);
-                    let finalOutput;
-                    output ? finalOutput = 'Present' : finalOutput = 'Absent'
-                    res.render('output', {file: `uploads/${req.file.filename}`, finalOutput:finalOutput, details:details, i1:i1, i2:i2, i3:i3})
+                    i11 = `http://127.0.0.1:5500/liveinlab/public/${i1}` 
+                    i22 = `http://127.0.0.1:5500/liveinlab/public/${i2}`
+                    i33 = `http://127.0.0.1:5500/liveinlab/public/${i3}`
+                    const o1 = results[4].slice(2,3)
+                    const o2 = results[4].slice(8,9)
+                    const o3 = results[4].slice(12,13)
+                    const cnt = results[5]
+                    tt = cnt
+                    let finalOutput
+                    o1===o2 && o2===o3 ? finalOutput = 'Present' : finalOutput = 'Absent'
+                    status = finalOutput
+                    inpImg=`uploads/${req.file.filename}`
+                    res.render('output', {file: `uploads/${req.file.filename}`, finalOutput:finalOutput, details:details, i1:i1, i2:i2, i3:i3,cnt:cnt})
+                    repDetails = details
                     details=[]
                   });
             
@@ -198,6 +216,44 @@ app.post('/', (req,res) => {
         }
     })
     
+})
+
+let link;
+app.get('/download',   (req,res) => {
+
+// var html = fs.readFileSync('./views/output.ejs', 'utf8');
+// var options = { format: 'Letter' };
+
+// pdf.create(html, options).toFile('./pdf/one.pdf', function(err, resp) {
+//   if (err) return console.log(err);
+//   console.log(resp.filename); // { filename: '/app/businesscard.pdf' }
+//   link = resp.filename
+// });
+ejs.renderFile(path.join(__dirname, './views/', "report-template.ejs"), {file: inpImg, finalOutput:status, details:repDetails, i1:i11, i2:i22, i3:i33,cnt:tt}, (err, data) => {
+    if (err) {
+          res.send(err);
+    } else {
+        link=`./pdf/${repDetails[0].name}.pdf`
+        pdf.create(data).toFile(link, function  (err, data) { 
+            if (err) {
+                res.send(err);
+            } else{
+                res.download(link)
+                // res.render('report-template', {file: inpImg, finalOutput:status, details:repDetails, i1:i11, i2:i22, i3:i33,cnt:tt})
+                //res.send('ok')
+            }
+
+        });
+    }
+});
+
+i11=''
+i22=''
+i33=''
+tt=''
+inpImg=''
+repDetails=[]
+
 })
 
 

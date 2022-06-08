@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Document</title>
+</head>
+<body>
+
+   <div class="grid-container">
+    <div class="detail">
+        <% details.forEach(detail => { %>=
+            <h1>Name:<%= detail.name %></h1>
+            <h1>Age:<%= detail.age %></h1>
+            <h1>Gender:<%= detail.gender %></h1>
+            <h1>Doctor Name: <%= detail.drName %></h1>
+       <% }); %>
+    </div>
+    
+    <div class="image">
+        <img src="<%= typeof file != 'undefined' ? file : '' %>" alt="" ></img>
+        <!-- <img src="http://127.0.0.1:5500/liveinlab/public/result/_ODntW1a0yHgVAc-8oGfH3.png"> -->
+    </div>
+
+    <div class="result">
+       <h4> Tumor Status: <%= typeof finalOutput != 'undefined' ? finalOutput : '' %> </h4>
+       <h4> CNT: <%= typeof cnt != 'undefined' ? cnt : '' %> </h4>
+       
+    </div>
+
+    <img src="<%= typeof i1 != 'undefined' ? i1 : '' %>" alt="" ></img>
+   <img src="<%= typeof i2 != 'undefined' ? i2 : '' %>" alt="" ></img>
+   <img src="<%= typeof i3 != 'undefined' ? i3 : '' %>" alt="" ></img>
+   </div>
+
+
+    
+</body>
+</html>

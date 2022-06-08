@@ -24,7 +24,9 @@
     </div>
 
     <div class="result">
-        <h4> Tumor Status: <%= typeof finalOutput != 'undefined' ? finalOutput : '' %> </h4>
+       <h4> Tumor Status: <%= typeof finalOutput != 'undefined' ? finalOutput : '' %> </h4>
+       <h4> CNT: <%= typeof cnt != 'undefined' ? cnt : '' %> </h4>
+       
     </div>
 
     <img src="<%= typeof i1 != 'undefined' ? i1 : '' %>" alt="" >
@@ -32,6 +34,7 @@
    <img src="<%= typeof i3 != 'undefined' ? i3 : '' %>" alt="" >
    </div>
 
+    <a href="/download">Download</a>
 
     
 </body>
